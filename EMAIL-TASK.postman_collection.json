@@ -1,0 +1,228 @@
+{
+	"info": {
+		"_postman_id": "7339ced9-d398-471c-b24d-f9c45c032b9b",
+		"name": "EMAIL-TASK",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All Email",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/email/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"email",
+						"create"
+					]
+				},
+				"description": "This API return all the saved emails."
+			},
+			"response": []
+		},
+		{
+			"name": "Get Single Email",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/email/create?id=3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"email",
+						"create"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "3"
+						}
+					]
+				},
+				"description": "This API return single the saved emails. If email not exist as per passed ID it will return error message."
+			},
+			"response": []
+		},
+		{
+			"name": "Create Email",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "users",
+							"value": "test@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "message",
+							"value": "this is email message",
+							"type": "text"
+						},
+						{
+							"key": "status",
+							"value": "Pending",
+							"type": "text"
+						},
+						{
+							"key": "subject",
+							"value": "Subject or email.",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8888/email/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"email",
+						"create"
+					]
+				},
+				"description": "This API save email receiver, message or status in database. \n\nStatus can be Pending or Complete."
+			},
+			"response": []
+		},
+		{
+			"name": "Create Email Multiple Receiver",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "users",
+							"value": "test@gmail.com,test2@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "message",
+							"value": "this is email message",
+							"type": "text"
+						},
+						{
+							"key": "status",
+							"value": "Pending",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8888/email/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"email",
+						"create"
+					]
+				},
+				"description": "This API save email receiver, message or status in database. \n\nStatus can be Pending or Complete. For multiple receive you need to pass multiple email ids separated by comma(,)."
+			},
+			"response": []
+		},
+		{
+			"name": "Get Sender",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/email/sender",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"email",
+						"sender"
+					]
+				},
+				"description": "This email return sender information."
+			},
+			"response": []
+		},
+		{
+			"name": "Define Sender",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "sender",
+							"value": "ravi@gmail.com.com",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8888/email/sender",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"email",
+						"sender"
+					]
+				},
+				"description": "This email define sender information. If sender already exist then it will delete old sender."
+			},
+			"response": []
+		},
+		{
+			"name": "Send Email",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id",
+							"value": "3",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8888/email/send",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"email",
+						"send"
+					]
+				},
+				"description": "This APi send emails to receiver. To do that you need to define SMTP details in settings.py file, Then need to configure django send_email function.\n\n\n\nEMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'\nEMAIL_HOST = 'smtp.gmail.com'\nEMAIL_USE_TLS = True\nEMAIL_PORT = 587\nEMAIL_HOST_USER = #sender's email-id \nEMAIL_HOST_PASSWORD = #password associated with above email-id \n\n"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
